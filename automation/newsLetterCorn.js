@@ -2,7 +2,7 @@ import corn from "node-cron";
 import {Job} from '../models/jobSchema.js';
 import {User} from "../models/userSchema.js"
 import { sendEmail } from "../utils/sendEmail.js";
-import next from "next";
+
 
 
 export const newsLetterCorn=()=>{
