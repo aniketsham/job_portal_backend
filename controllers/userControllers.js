@@ -2,7 +2,7 @@ import { catchAsyncErrors } from "../middlewares/catchAsyncError.js";
 import ErrorHandler from "../middlewares/errorMiddleware.js";
 import { User } from "../models/userSchema.js";
 import { v2 as cloudinary } from "cloudinary";
-import { sendToken } from "../utils/jwtToken.js";
+import { sendToken } from "../utils/jwttoken.js";
 
 export const register = catchAsyncErrors(async (req, res, next) => {
   try {
