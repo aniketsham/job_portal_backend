@@ -13,11 +13,19 @@ const app=express()
 config({path:"./config/config.env"})
 
 app.use(cors({
-    origin:process.env.FRONTEND_URL,
-    methods:["GET","POST","PUT","DELETE","OPTIONS"],
-    credentials:true,
-    
-}))
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true); // Allow non-browser requests
+        if (process.env.FRONTEND_URL.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Including OPTIONS for preflight
+    allowedHeaders: ["Content-Type", "Authorization"], // Customize headers as needed
+    credentials: true,
+}));
+
 app.options('*', cors());
 app.use(cookieParser());
 app.use(express.json());
